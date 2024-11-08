@@ -21,7 +21,7 @@
   </div>
   <br>
   <div>
-  🏠Guangdong Channel: 广东珠江, 广东体育, 广东新闻, 广东卫视, 大湾区卫视, 广州影视, 广州竞赛, 江门综合, 江门侨乡生活, 佛山综合, 深圳卫视, 汕头综合, 汕头经济, 汕头文旅, 茂名综合, 茂名公共
+  🏠Guangdong Channel: 广东珠江, 广东体育, 广东新闻, 广东民生, 广东卫视, 大湾区卫视, 广州综合, 广州影视, 广州竞赛, 江门综合, 江门侨乡生活, 佛山综合, 深圳卫视, 汕头综合, 汕头经济, 汕头文旅, 茂名综合, 茂名公共
   </div>
   <br>
   <div>
@@ -70,28 +70,36 @@
   <a href="https://hub.docker.com/repository/docker/guovern/tv-requests">
     <img src="https://img.shields.io/docker/pulls/guovern/tv-requests?label=docker:requests" />
   </a>
-   <a href="https://hub.docker.com/repository/docker/guovern/tv-driver">
+  <a href="https://hub.docker.com/repository/docker/guovern/tv-driver">
     <img src="https://img.shields.io/docker/pulls/guovern/tv-driver?label=docker:driver" />
+  </a>
+  <a href="https://github.com/Guovin/TV/fork">
+    <img src="https://img.shields.io/github/forks/guovin/tv" />
   </a>
 </p>
 
 [中文](./README.md) | English
 
-## Features
+## ✅ Features
 
-- Customize the template to generate the channel you want
-- Supports multiple source acquisition methods: multicast source, hotel source, subscription source, keyword search
-- Interface speed testing and verification, with priority on response time and resolution, filtering out ineffective interfaces
-- Scheduled execution at 6:00 AM and 18:00 PM Beijing time daily
-- Supports various execution methods: workflows, command line, GUI software, Docker(amd64/arm64)
-- For more features, see [Config parameter](./docs/config_en.md)
+- ✅ Customize the template to generate the channel you want
+- ✅ Supports multiple source acquisition methods: multicast source, hotel source, subscription source, keyword search
+- ✅ Interface speed testing and verification, with priority on response time and resolution, filtering out ineffective interfaces
+- ✅ Preferences: IPv6, priority and quantity of interface source sorting, and interface whitelist
+- ✅ Scheduled execution at 6:00 AM and 18:00 PM Beijing time daily
+- ✅ Supports various execution methods: workflows, command line, GUI software, Docker(amd64/arm64)
+- ✨ For more features, see [Config parameter](./docs/config_en.md)
 
-## Latest results：
+## 🔗 Latest results
 
 - Interface source:
 
 ```bash
 https://ghproxy.net/raw.githubusercontent.com/Guovin/TV/gd/output/result.m3u
+```
+
+```bash
+https://ghproxy.net/raw.githubusercontent.com/Guovin/TV/gd/output/result.txt
 ```
 
 - Data source:
@@ -100,11 +108,11 @@ https://ghproxy.net/raw.githubusercontent.com/Guovin/TV/gd/output/result.m3u
 https://ghproxy.net/raw.githubusercontent.com/Guovin/TV/gd/source.json
 ```
 
-## Config
+## ⚙️ Config
 
 [Config parameter](./docs/config_en.md)
 
-## Quick Start
+## 🚀 Quick Start
 
 ### Method 1: Workflow
 
@@ -113,8 +121,14 @@ Fork this project and initiate workflow updates, detailed steps are available at
 ### Method 2: Command Line
 
 ```python
-pip3 install pipenv
+pip install pipenv
+```
+
+```python
 pipenv install
+```
+
+```python
 pipenv run build
 ```
 
@@ -132,47 +146,62 @@ pipenv run ui
 
 ### Method 4: Docker
 
-- requests: Lightweight, low performance requirements, fast update speed, stability uncertain (recommend using this version for the subscription source)
 - driver: Higher performance requirements, slower update speed, high stability and success rate. Set open_driver = False to switch to the request version (recommended for hotel sources, multicast sources, and online searches)
+- requests: Lightweight, low performance requirements, fast update speed, stability uncertain (recommend using this version for the subscription source)
 
-It's recommended to try each one and choose the version that suits you.
+It's recommended to try each one and choose the version that suits you
 
-```bash
 1. Pull the image:
-For requests version:
-docker pull guovern/tv-requests:latest
-
-For driver version:
+- driver
+```bash
 docker pull guovern/tv-driver:latest
+```
+
+- requests
+```bash
+docker pull guovern/tv-requests:latest
+```
 
 2. Run the container:
-docker run -d -p 8000:8000 guovern/tv-requests or driver
+- driver
+```bash
+docker run -d -p 8000:8000 guovern/tv-driver
+```
+
+- requests
+```bash
+docker run -d -p 8000:8000 guovern/tv-requests
+```
 
 Volume Mount Parameter (Optional):
 This allows synchronization of files between the host machine and the container. Modifying templates, configurations, and retrieving updated result files can be directly operated in the host machine's folder.
 
-config:
--v <path>/config:/tv-requests/config or tv-driver/config
+Taking the host path /etc/docker as an example:
 
-result:
--v <path>/output:/tv-requests/output or tv-driver/output
-
-For example: docker run -v /etc/docker/config:/tv-requests/config -v /etc/docker/output:/tv-requests/output -d -p 8000:8000 guovern/tv-requests
-
-3. Check the update results: Visit (domain:8000)
+- driver：
+```bash
+docker run -v /etc/docker/config:/tv-driver/config -v /etc/docker/output:/tv-driver/output -d -p 8000:8000 guovern/tv-driver
 ```
 
-#### Note: Link to the result file after updates of methods one to three: http://local ip:8000 or http://localhost:8000
+- requests：
+```bash
+docker run -v /etc/docker/config:/tv-requests/config -v /etc/docker/output:/tv-requests/output -d -p 8000:8000 guovern/tv-requests
+````
 
-## Changelog
+3. Update results:
+- API address: ip:8000
+- API details: ip:8000/result
+- Speed test log: ip:8000/log
+
+## 🗓️ Changelog
 
 [Changelog](./CHANGELOG.md)
 
-## License
+## ⚖️ License
 
 [MIT](./LICENSE) License &copy; 2024-PRESENT [Govin](https://github.com/guovin)
 
-## Appreciate
+## 💰️ Appreciate
 
 <div>Please buy me a cup of coffee☕️~</div>
 
@@ -180,6 +209,6 @@ For example: docker run -v /etc/docker/config:/tv-requests/config -v /etc/docker
 | ------------------------------------- | ----------------------------------------- |
 | ![Alipay](./static/images/alipay.jpg) | ![Wechat](./static/images/appreciate.jpg) |
 
-## Disclaimer
+## 📣 Disclaimer
 
 This project is for learning and communication purposes only. All interface data comes from the internet. If there is any infringement, please contact us for removal.
